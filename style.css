@@ -1,0 +1,11 @@
+/* CSS files add styling rules to your content */
+
+body {
+  background: url('https://cdn.glitch.com/0ed52206-78ba-474f-82aa-693ad260bfbd%2Fplanty1.jpg?v=1595000172335') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+
