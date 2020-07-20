@@ -1,4 +1,4 @@
-const SEGMENT_WRITE_KEY = "VuOZbPNXuR76IXTQeYaU6twg3qpSNAw9";
+const SEGMENT_WRITE_KEY = "<Update with Segment Source Write Key>";
 //determines whether All: false is added to Segment's analytics.load integrations object https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/#selecting-destinations
 const DISABLE_DESTINATIONS_BY_DEFAULT = true;
 const shouldSendToSegment = true;
