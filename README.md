@@ -10,4 +10,4 @@ This repos shows an example of how to integrate Segment's Analytics.js library w
 4) Indicate whether you want to disable data being sent to Segment destinations by default on line 3 of script.js file
 
 
-\ ゜o゜)ノ
+
