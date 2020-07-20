@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OneTrust/Segment Consent Manager</title>
+    <meta charset="UTF-8" />
+    <!-- OneTrust Cookies Consent Script -->
+    <script
+      src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+      type="text/javascript"
+      charset="UTF-8"
+      data-domain-script="d5c2e11e-3c1c-4609-9671-842607fc48ac-test"
+    ></script>
+    <script type="text/javascript">
+      function OptanonWrapper() {
+        //using insert script OneTrust helper function https://community.cookiepro.com/s/article/UUID-730ad441-6c4d-7877-7f85-36f1e801e8ca
+        // note, we are selecting category "C0001" so script will fire every time a user updates consent
+        OneTrust.InsertScript("script.js", "head", null, null, "C0002");
+        OneTrust.InsertScript("script.js", "head", null, null, "C0003");
+        OneTrust.InsertScript("script.js", "head", null, null, "C0004");
+      }
+    </script>
+
+    <!-- Segment script, note we removed analytics.load() and analytics.page() from default script -->
+    <script>
+      !(function() {
+        var analytics = (window.analytics = window.analytics || []);
+        if (!analytics.initialize)
+          if (analytics.invoked)
+            window.console &&
+              console.error &&
+              console.error("Segment snippet included twice.");
+          else {
+            analytics.invoked = !0;
+            analytics.methods = [
+              "trackSubmit",
+              "trackClick",
+              "trackLink",
+              "trackForm",
+              "pageview",
+              "identify",
+              "reset",
+              "group",
+              "track",
+              "ready",
+              "alias",
+              "debug",
+              "page",
+              "once",
+              "off",
+              "on",
+              "addSourceMiddleware",
+              "addIntegrationMiddleware",
+              "setAnonymousId",
+              "addDestinationMiddleware"
+            ];
+            analytics.factory = function(e) {
+              return function() {
+                var t = Array.prototype.slice.call(arguments);
+                t.unshift(e);
+                analytics.push(t);
+                return analytics;
+              };
+            };
+            for (var e = 0; e < analytics.methods.length; e++) {
+              var t = analytics.methods[e];
+              analytics[t] = analytics.factory(t);
+            }
+            analytics.load = function(e, t) {
+              var n = document.createElement("script");
+              n.type = "text/javascript";
+              n.async = !0;
+              n.src =
+                "https://cdn.segment.com/analytics.js/v1/" +
+                e +
+                "/analytics.min.js";
+              var a = document.getElementsByTagName("script")[0];
+              a.parentNode.insertBefore(n, a);
+              analytics._loadOptions = t;
+            };
+            analytics.SNIPPET_VERSION = "4.1.0";
+            //analytics.load("VuOZbPNXuR76IXTQeYaU6twg3qpSNAw9");
+            //analytics.page();
+          }
+      })();
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row justify-content-center align-self-center">
+        <div class="col-sm-10">
+          <div class="card border-0 shadow my-5">
+            <div class="card-body p-4">
+              <h1 class="font-weight-normal text-success">
+                OneTrust Demo Integration With Segment's Analytics.js Library
+              </h1>
+              <p class="lead">
+                This demo is intended to show how you can integrate
+                <a
+                  href="https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/"
+                  target="_blank"
+                  >Segment's Analytics.js library
+                </a>
+                with
+                <a
+                  href="https://www.cookiepro.com/products/cookie-consent/"
+                  target="_blank"
+                >
+                  OneTrust's cookie consent manager.</a
+                >
+              </p>
+
+              <p class="lead">
+                Specifically, this demo showcases how you can control what
+                destinations Segment will send data to based on the OneTrust
+                consent groups the user has opted in to.
+              </p>
+
+              <div class="row my-5">
+                <h4 class="font-weight-light mx-3">
+                  Click the buttons below to see how Segment is loading
+                </h4>
+              </div>
+
+              <div class="row my-5">
+                <button
+                  class="btn btn-success mx-5"
+                  data-toggle="collapse"
+                  data-target="#hasSegmentLoaded"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="hasSegmentLoaded"
+                >
+                  Has Segment Loaded?
+                </button>
+
+                <div class="collapse my-3" id="hasSegmentLoaded">
+                  <div class="card card-body">
+                    <h3 id="hasSegmentLoadedBody"></h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row my-5">
+                <button
+                  class="btn btn-success mx-5"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#showConsentGroups"
+                  aria-expanded="false"
+                  aria-controls="showConsentGroups"
+                >
+                  Show OneTrust Consent Groups
+                </button>
+
+                <div class="collapse my-3" id="showConsentGroups">
+                  <div class="card card-body">
+                    <h3 id="showConsentGroupsBody"></h3>
+                  </div>
+                </div>
+              </div>
+              <div class="row my-5">
+                <button
+                  class="btn btn-success mx-5"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#showDestinationPreferences"
+                  aria-expanded="false"
+                  aria-controls="showDestinationPreferences"
+                >
+                  Show Segment Destination Preferences
+                </button>
+                <div class="collapse my-3" id="showDestinationPreferences">
+                  <div class="card card-body">
+                    <h4 id="showDestinationPreferencesBody"></h4>
+                  </div>
+                </div>
+              </div>
+              <div class="row my-5">
+                <button
+                  class="btn btn-success mx-5"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#sendPageCall"
+                  aria-expanded="false"
+                  aria-controls="sendPageCall"
+                >
+                  Send Segment Page Call
+                </button>
+                <div class="collapse my-3" id="sendPageCall">
+                  <div class="card card-body">
+                    <h4 id="sendPageCallBody"></h4>
+                  </div>
+                </div>
+              </div>
+              <div class="row my-5">
+                <button
+                  type="button"
+                  class="btn btn-success mx-5"
+                  onclick="clearCookies()"
+                >
+                  Clear Cookies
+                </button>
+              </div>
+
+              <div style="height:100px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      //JS to handle has Segment Loaded Button
+      $("#hasSegmentLoaded").on("show.bs.collapse", function() {
+        if (window.analytics.initialized) {
+          console.log("Segment has loaded");
+          return showConsentGroups;
+        } else {
+          console.log("Segment Has NOT Loaded");
+          return document
+            .getElementById("hasSegmentLoadedBody")
+            .insertAdjacentHTML("afterbegin", "No");
+        }
+      });
+      $("#hasSegmentLoaded").on("hidden.bs.collapse", function() {
+        return (document.getElementById("hasSegmentLoadedBody").innerHTML = "");
+      });
+    </script>
+    <script>
+      //JS to handle show Consent Group Button
+      $("#showConsentGroups").on("show.bs.collapse", function() {
+        if (!window.OnetrustActiveGroups) {
+          console.log("No OneTrust groups have been consented to");
+          return document
+            .getElementById("showConsentGroupsBody")
+            .insertAdjacentHTML(
+              "afterbegin",
+              "No groups have been consented to"
+            );
+        }
+        const oneTrustActiveGroupArray = window.OnetrustActiveGroups.split(
+          ","
+        ).filter(e => e.startsWith("C"));
+        return document
+          .getElementById("showConsentGroupsBody")
+          .insertAdjacentHTML("afterbegin", oneTrustActiveGroupArray);
+      });
+      $("#showConsentGroups").on("hidden.bs.collapse", function() {
+        return (document.getElementById("showConsentGroupsBody").innerHTML =
+          "");
+      });
+    </script>
+    <script>
+      //JS to handle show destination preferences button
+      $("#showDestinationPreferences").on("show.bs.collapse", function() {
+        if (window.analytics.initialized) {
+          console.log(window.destinationPreferences);
+          const destinationPreferences = window.destinationPreferences.toString();
+          return document
+            .getElementById("showDestinationPreferencesBody")
+            .insertAdjacentHTML(
+              "afterbegin",
+              JSON.stringify(window.destinationPreferences)
+            );
+        } else {
+          console.log("Segment has not loaded");
+          return document
+            .getElementById("showDestinationPreferencesBody")
+            .insertAdjacentHTML("afterbegin", "Segment has not loaded");
+        }
+      });
+      $("#showDestinationPreferences").on("hidden.bs.collapse", function() {
+        return (document.getElementById(
+          "showDestinationPreferencesBody"
+        ).innerHTML = "");
+      });
+    </script>
+    <script>
+      //JS to handle send page call button
+      $("#sendPageCall").on("show.bs.collapse", function() {
+        if (window.analytics.initialized) {
+          analytics.page("OneTrust/Segment Demo Page");
+          return document
+            .getElementById("sendPageCallBody")
+            .insertAdjacentHTML("afterbegin", "Page Call Sent");
+        } else {
+          console.log("Segment Has NOT Loaded");
+          return document
+            .getElementById("sendPageCallBody")
+            .insertAdjacentHTML("afterbegin", "Segment has not loaded");
+        }
+      });
+
+      $("#sendPageCall").on("hidden.bs.collapse", function() {
+        return (document.getElementById("sendPageCallBody").innerHTML = "");
+      });
+    </script>
+    <script>
+      //JS to clear cookies + local storage
+      function clearCookies() {
+        console.log("clearing cookies");
+        localStorage.clear()
+        var c = document.cookie.split("; ");
+        for (i in c) {
+          document.cookie =
+            /^[^=]+/.exec(c[i])[0] + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+
+        location.reload(true);
+      }
+    </script>
+  </body>
+</html>
