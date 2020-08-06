@@ -78,4 +78,3 @@ The script.js file performs the following once it is called:
 5. In your script.js file, update the ONE_TRUST_SEGMENT_MAPPING object (lines 8-15 of the demo’s script.js file) to specify what Segment destination categories map to which OneTrust cookie category IDs. Add your Segment source write key to [this tool](https://fixed-kind-tartan.glitch.me/) to see what destinations and destination categories are connected to it (lines 8-15 of the [demo’s](https://glitch.com/edit/#!/plastic-teal-gasoline?path=script.js%3A1%3A0) script.js file)
 
 
-
