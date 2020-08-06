@@ -13,7 +13,7 @@ This demo shows an example of how to integrate [OneTrust’s cookie consent mana
 Referencing the diagram above, when the user first visits the site, they will see the OneTrust consent banner and have the option to either accept all cookies or else opt into individual categories. OneTrust will block all cookies/scripts from loading on the site, including Analytics.js, until the user has provided their consent. 
 
 
-![alt_text](images/image_1.png "OneTrust Consent Modal" | width=100))
+![alt_text](images/image_1.png "OneTrust Consent Modal" | width=100)
 
 
 You can configure these categories within your OneTrust dashboard. [Refer to OneTrust’s documentation](https://my.onetrust.com/s/) for more information on how to manage these categories, scan your website for existing cookies and map cookies to categories. 
