@@ -8,18 +8,18 @@ This demo shows an example of how to integrate [OneTrust’s cookie consent mana
 ![](images/architecturediagram.png)
 
 
-->**Fig 1: Architecture of Analytics.js/OneTrust Integration**<-
+<p style="text-align: center;">**Fig 1: Architecture of Analytics.js/OneTrust Integration**</p>
 
 Referencing the diagram above, when the user first visits the site, they will see the OneTrust consent banner and have the option to either accept all cookies or else opt into individual categories. OneTrust will block all cookies/scripts from loading on the site, including Analytics.js, until the user has provided their consent. 
 
 
-![alt_text](images/image_1.png "OneTrust Consent Modal")
+![alt_text](images/image_1.png =150px "OneTrust Consent Modal")
 
 
 You can configure these categories within your OneTrust dashboard. [Refer to OneTrust’s documentation](https://my.onetrust.com/s/) for more information on how to manage these categories, scan your website for existing cookies and map cookies to categories. 
 
 
-![alt_text](images/image_2.png "OneTrust UI for managing consent categories")
+![alt_text](images/image_2.png =50px "OneTrust UI for managing consent categories")
 
 
 When a user opts in to tracking for a certain category of cookie tracking (or all categories), OneTrust will set `window.OnetrustActiveGroups` to reflect what categories a user has consented to. [The OptanonConsent cookie](https://my.onetrust.com/s/article/UUID-1e75fb0d-bb79-2af8-cb85-f905d16f1220?topicId=0TO1Q000000ssJBWAY) will also be updated with the consent groups the user has opted into. For example if a user opts into Performance and Targeting cookies `window.OnetrustActiveGroups` will appear as: 
@@ -28,10 +28,10 @@ When a user opts in to tracking for a certain category of cookie tracking (or al
 
 The integration script relies on the optanonWrapper() function to call the script that loads Segment based on ‘window.OnetrustActiveGroups`. This wrapper function will fire on each page load, or whenever the user updates their consent preferences. You can read more about this wrapper function [here](https://my.onetrust.com/s/article/UUID-730ad441-6c4d-7877-7f85-36f1e801e8ca)
 
-![alt_text](images/image_4.png "OptanonWrapper() function")
+![alt_text](images/image_4.png =150px "OptanonWrapper() function")
 
 
-Specifically, the script.js that loads Segment is executed using the OneTrust helper function `[OneTrust.InsertScript](https://my.onetrust.com/s/article/UUID-730ad441-6c4d-7877-7f85-36f1e801e8ca?topicId=0TO1Q000000ItVuWAK)`. This helper function dynamically adds an external JavaScript file into the DOM whenever a specified OneTrust consent group is consented to. Since we want Segment to load either based on one or all consent groups being consented to, we trigger our script to load for each individual consent group
+Specifically, the script.js that loads Segment is executed using the OneTrust helper function [OneTrust.InsertScript](https://my.onetrust.com/s/article/UUID-730ad441-6c4d-7877-7f85-36f1e801e8ca?topicId=0TO1Q000000ItVuWAK). This helper function dynamically adds an external JavaScript file into the DOM whenever a specified OneTrust consent group is consented to. Since we want Segment to load either based on one or all consent groups being consented to, we trigger our script to load for each individual consent group
 
 ![alt_text](images/image_5.png "OneTrust.InsertScript")
 
