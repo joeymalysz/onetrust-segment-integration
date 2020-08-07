@@ -6,7 +6,7 @@ This demo shows an example of how to integrate [OneTrust’s cookie consent mana
 ### How It Works: 
 
 
-<p align ="center"><img src="images/architecturediagram.png" alt="OneTrust Consent Modal" width="800"/></p>
+<p align ="center"><img src="images/architecturediagram.png" alt="OneTrust Consent Modal"/></p>
 
 
 <p align ="center"><strong>Fig 1: Architecture of Analytics.js/OneTrust Integration</strong></p>
