@@ -23,12 +23,12 @@ You can configure these categories within your OneTrust dashboard. [Refer to One
 <p align ="center"><img src="images/image_2.png" style="align: center;" alt="OneTrust UI for managing consent categories" width="700"/></p>
 
 
-When a user opts in to tracking for a certain category of cookie tracking (or all categories), OneTrust will set `window.OnetrustActiveGroups` to reflect what categories a user has consented to. [The OptanonConsent cookie](https://my.onetrust.com/s/article/UUID-1e75fb0d-bb79-2af8-cb85-f905d16f1220?topicId=0TO1Q000000ssJBWAY) will also be updated with the consent groups the user has opted into. For example if a user opts into Performance and Targeting cookies `window.OnetrustActiveGroups` will appear as: 
+When a user opts in to tracking for a certain category of cookie tracking (or all categories), OneTrust will set `window.OnetrustActiveGroups` to reflect what categories a user has consented to. [The OptanonConsent cookie](https://my.onetrust.com/s/article/UUID-1e75fb0d-bb79-2af8-cb85-f905d16f1220?topicId=0TO1Q000000ssJBWAY) will also be updated with the consent groups the user has opted into. For example, if a user opts into Performance and Targeting cookies `window.OnetrustActiveGroups` will appear as: 
 
 
 <p align ="center"><img src="images/image_3.png" style="align: center;" alt="window.OneTrustActiveGroups" /></p>
 
-The integration script relies on the optanonWrapper() function to call the script that loads Segment based on ‘window.OnetrustActiveGroups`. This wrapper function will fire on each page load, or whenever the user updates their consent preferences. You can read more about this wrapper function [here](https://my.onetrust.com/s/article/UUID-730ad441-6c4d-7877-7f85-36f1e801e8ca)
+The integration script relies on the optanonWrapper() function to call the script that loads Segment based on `window.OnetrustActiveGroups`. This wrapper function will fire on each page load, or whenever the user updates their consent preferences. You can read more about this wrapper function [here](https://my.onetrust.com/s/article/UUID-730ad441-6c4d-7877-7f85-36f1e801e8ca)
 
 
 <p align ="center"><img src="images/image_4.png" style="align: center;" alt="OptanonWrapper() function" width="700"/></p>
