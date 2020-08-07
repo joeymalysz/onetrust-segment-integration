@@ -4,7 +4,7 @@ const DISABLE_DESTINATIONS_BY_DEFAULT = true;
 const shouldSendToSegment = true;
 
 //mapping OneTrust cookie categories to Segment's tool categories https://community.cookiepro.com/s/article/UUID-91049ba1-62b7-f7d3-8582-e3b36fadb7c9
-//to get destination names and cateogories assiociated with Segment write key, use this script https://codepen.io/samuelkahr/pen/gOpWyEG
+//to get destination names and cateogories assiociated with Segment write key, use this script https://fixed-kind-tartan.glitch.me/
 const ONE_TRUST_SEGMENT_MAPPING = {
   //OneTrust Performance Cookies
   C0002: ["A/B Testing", "Feature Flagging", "Live Chat"],
@@ -13,41 +13,7 @@ const ONE_TRUST_SEGMENT_MAPPING = {
   //OneTrust Targeting Cookies
   C0004: ["Email", "Email Marketing", "CRM"]
 };
-//returned value is array of OneTrust group ids user has consented to
-/*
-function getConsentGroups() {
-  //parse cookie string to find OptanonConsent cookie
-  const consentCookie = document.cookie
-    .split("; ")
-    .find(row => row.startsWith("OptanonConsent"));
 
-  //get consentGroups user has consented to from consentCookie
-  const consentGroups = consentCookie
-    .split("&")
-    .find(row => row.startsWith("groups"))
-    .split("=")[1];
-
-  //adding groups to array
-  const rawConsentArray = consentGroups.split("%");
-
-  const consentGroupArray = [];
-
-  //iterate through consentArray and remove ASCII encoding from start of each consent group value (values start with 2C)
-  for (const element of rawConsentArray) {
-    let updatedElement;
-    if (element.startsWith("2C")) {
-      updatedElement = element.substr(2);
-      consentGroupArray.push(updatedElement);
-    } else if (element.startsWith("C000")) {
-      consentGroupArray.push(element);
-    }
-  }
-
-  //console.log(consentGroupArray);
-
-  return consentGroupArray;
-}
-*/
 //helper function gets OneTrust active groups from window. Returns array of active groups users consented to
 function getConsentGroups() {
   if (!window.OnetrustActiveGroups) {
